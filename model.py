@@ -13,6 +13,9 @@ def mu(s, μmax=1.0, ks=0.2, **kw):
 def mu_inv(r, μmax=1.0, ks=0.2, **kw):
     return r*ks/(μmax - r)
 
+def mu_deriv(s, μmax=1.0, ks=0.2, **kw):
+    return (μmax*ks) / (ks + s)**2
+
 def growth_rate(s, x, D=1.0, Sin=2.0, μmax=1.0, ks=0.2):
     μ = mu(s, μmax=μmax, ks=ks)
     ds = -μ*x + D*(Sin - s)

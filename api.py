@@ -11,9 +11,11 @@ def phase_portrait(xlim, ylim, dF, mesh=1.0, step=0.1,
     """
     if not ax:
         fig, ax = plt.subplots()
-        ax.axes.set_aspect('equal')
+    else:
+        fig = ax.get_figure()
+    ax.axes.set_aspect('equal')
     xmesh, ymesh = mesh if type(mesh) is tuple else mesh, mesh
-    xstep, ystep = step if type(mesh) is tuple else step, step
+    xstep, ystep = step if type(step) is tuple else step, step
     title = kwargs.pop("title", None)
     xlabel = kwargs.pop("xlabel", None)
     ylabel = kwargs.pop("ylabel", None)
@@ -37,11 +39,25 @@ def phase_portrait(xlim, ylim, dF, mesh=1.0, step=0.1,
     SP = ax.streamplot(X, Y, dX, dY, density=density, **kwargs)
 
     # legend
-    if not fig:
-        fig = ax.get_figure()
     if title:
         fig.suptitle(title)
     if xlabel:
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
+    return ax
+
+def plot_eigenspaces(u, v, t=[-1,1], ax=None, **kwargs):
+    if ax:
+        xmin, xmax, ymin, ymax = ax.axis()
+    else:
+        _, ax = plt.subplots()
+        xmin, xmax = t[0], t[-1]
+        ymin, ymax = t[0], t[-1]
+    if t:
+        t = np.linspace(t[0], t[-1], 3)
+    else:
+        t = np.linspace(min(xmin,ymin), max(xmax,ymax), 3)
+    ax.plot(u[0]*t, u[1]*t, label='$\\lambda_1$')
+    ax.plot(v[0]*t, v[1]*t, label='$\\lambda_2$')
+    ax.axis([xmin, xmax, ymin, ymax])
     return ax
