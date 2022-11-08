@@ -58,3 +58,23 @@ def plot_eigenspaces(u, v, pt=[0,0], t=[-1,1], ax=None, **kwargs):
     ax.plot(v[0]*t + pt[0], v[1]*t + pt[1], label='$\\lambda_2$')
     ax.axis([xmin, xmax, ymin, ymax])
     return ax
+
+def set_lims(center=[0,0], size=2):
+    c = np.array(center)
+    d = np.array(size) if hasattr(size, '__len__') else size * np.ones(len(center))
+    d /= 2
+    xlim = center[0] - d[0], center[0] + d[0]
+    ylim = center[1] - d[1], center[1] + d[1]
+    return xlim, ylim
+
+def plot_equilibria(eq, name=None, ax=None, **kwargs):
+    if not ax: ax = plt.subplots()
+    color = kwargs.pop('color', 'black')
+    marker = kwargs.pop('marker', 'o')
+    E = np.array(eq)
+    ax.plot(E[:,0], E[:,1], color=color, marker=marker, linestyle='', **kwargs)
+    if name and len(name) == len(eq):
+        fontsize = kwargs.pop('fontsize', 12)
+        for i in range(len(eq)):
+            ax.text(E[i,0] + 0.02, E[i,1] + 0.02, name[i], fontsize=fontsize)
+    return ax

@@ -25,6 +25,13 @@ def growth_rate(s, x, D=1.0, Sin=2.0, μmax=1.0, ks=0.2):
 def isocline_ds(s, D=1.0, Sin=2.0, μmax=1.0, ks=0.2):
     return D*(Sin - s) / mu(s, μmax=μmax, ks=ks)
 
+def equilibria(D=1.0, Sin=2.0, **kw):
+    E = [[Sin, 0]]
+    if D < mu(Sin, **kw) and D < kw['μmax']:
+        s1 = mu_inv(D, **kw)
+        E.append([s1, Sin - s1])
+    return E
+
 # plots
 def plot_isocline_dx(ax, **kwargs):
     xmin, xmax, ymin, ymax = ax.axis()
