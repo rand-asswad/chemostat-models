@@ -46,18 +46,15 @@ def phase_portrait(xlim, ylim, dF, mesh=1.0, step=0.1,
         ax.set_ylabel(ylabel)
     return ax
 
-def plot_eigenspaces(u, v, t=[-1,1], ax=None, **kwargs):
+def plot_eigenspaces(u, v, pt=[0,0], t=[-1,1], ax=None, **kwargs):
     if ax:
         xmin, xmax, ymin, ymax = ax.axis()
     else:
         _, ax = plt.subplots()
-        xmin, xmax = t[0], t[-1]
-        ymin, ymax = t[0], t[-1]
-    if t:
-        t = np.linspace(t[0], t[-1], 3)
-    else:
-        t = np.linspace(min(xmin,ymin), max(xmax,ymax), 3)
-    ax.plot(u[0]*t, u[1]*t, label='$\\lambda_1$')
-    ax.plot(v[0]*t, v[1]*t, label='$\\lambda_2$')
+        xmin, xmax = t[0] + pt[0], t[-1] + pt[1]
+        ymin, ymax = t[0] + pt[0], t[-1] + pt[1]
+    t = np.linspace(t[0], t[-1], 3)
+    ax.plot(u[0]*t + pt[0], u[1]*t + pt[1], label='$\\lambda_1$')
+    ax.plot(v[0]*t + pt[0], v[1]*t + pt[1], label='$\\lambda_2$')
     ax.axis([xmin, xmax, ymin, ymax])
     return ax
