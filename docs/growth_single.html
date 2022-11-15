@@ -14260,42 +14260,49 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div hidden>
+
+\newcommand{\require}[1]{}
+
+$\require{begingroup}\require{newcommand}$
+
 $$
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\renewcommand{\Re}{\mathrm{Re}}
-\renewcommand{\Im}{\mathrm{Im}}
-\newcommand{\Sin}{S_{\mathrm{in}}}
-\newcommand{\Fin}{F_{\mathrm{in}}}
-\newcommand{\Fout}{F_{\mathrm{out}}}
-\newcommand{\dd}{\mathrm{d}}
-\newcommand{\ds}{\mathrm{d}s}
-\newcommand{\dx}{\mathrm{d}x}
-\newcommand{\dt}{\mathrm{d}t}
-\newcommand{\dq}{\mathrm{d}q}
-\newcommand{\ddt}{\frac{\dd}{\dt}}
-\newcommand{\dsdt}{\frac{\ds}{\dt}}
-\newcommand{\dxdt}{\frac{\dx}{\dt}}
-\newcommand{\dvdt}{\frac{\dd v}{\dt}}
-\newcommand{\dvsdt}{\frac{\dd (vs)}{\dt}}
-\newcommand{\dvxdt}{\frac{\dd (vx)}{\dt}}
-\newcommand{\dqdt}{\frac{\dq}{\dt}}
-\newcommand{\partials}[2]{\frac{\partial#1}{\partial#2}}
-\newcommand{\gL}{g\cdot L^{-1}}
-\newcommand{\L}{L}
-\newcommand{\CC}{\mathcal{C}}
-\newcommand{\span}{\mathrm{span}}
-\newcommand{\pp}[1]{\left(#1\right)}
-\newcommand{\bb}[1]{\left[#1\right]}
-\newcommand{\cb}[1]{\left\{#1\right\}}
-\newcommand{\abs}[1]{\left\lvert#1\right\rvert}
-\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-\newcommand{\sset}[2]{\cb{#1\left\lvert#2\right.}}
-\newcommand{\mat}[1]{\begin{matrix}#1\end{matrix}}
-\newcommand{\pmat}[1]{\begin{pmatrix}#1\end{pmatrix}}
-\newcommand{\vmat}[1]{\begin{vmatrix}#1\end{vmatrix}}
-\newcommand{\ub}[2]{\underbrace{#1}_{\substack{\text{#2}}}}
+\gdef\R{\mathbb{R}}
+\gdef\Cx{\mathbb{C}}
+\gdef\Re{\mathrm{Re}}
+\gdef\Im{\mathrm{Im}}
+\gdef\Sin{S_{\mathrm{in}}}
+\gdef\Fin{F_{\mathrm{in}}}
+\gdef\Fout{F_{\mathrm{out}}}
+\gdef\mumax{\mu_{\max}}
+\gdef\dd{\mathrm{d}}
+\gdef\ds{\mathrm{d}s}
+\gdef\dx{\mathrm{d}x}
+\gdef\dt{\mathrm{d}t}
+\gdef\dq{\mathrm{d}q}
+\gdef\ddt{\frac{\dd}{\dt}}
+\gdef\dsdt{\frac{\ds}{\dt}}
+\gdef\dxdt{\frac{\dx}{\dt}}
+\gdef\dvdt{\frac{\dd v}{\dt}}
+\gdef\dvsdt{\frac{\dd (vs)}{\dt}}
+\gdef\dvxdt{\frac{\dd (vx)}{\dt}}
+\gdef\dqdt{\frac{\dq}{\dt}}
+\gdef\partials#1#2{\frac{\partial#1}{\partial#2}}
+\gdef\gL{g\cdot L^{-1}}
+\gdef\CC{\mathcal{C}}
+\gdef\vect{\mathrm{span}}
+\gdef\pp#1{\left(#1\right)}
+\gdef\bb#1{\left[#1\right]}
+\gdef\cb#1{\left\{#1\right\}}
+\gdef\abs#1{\left\lvert#1\right\rvert}
+\gdef\norm#1{\left\lVert#1\right\rVert}
+\gdef\sset#1#2{\cb{#1\left\lvert#2\right.}}
+\gdef\mat#1{\begin{matrix}#1\end{matrix}}
+\gdef\pmat#1{\begin{pmatrix}#1\end{pmatrix}}
+\gdef\vmat#1{\begin{vmatrix}#1\end{vmatrix}}
+\gdef\ub#1#2{\underbrace{#1}_{\substack{\text{#2}}}}
 $$
+</div>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
@@ -14308,10 +14315,10 @@ reactors (chemostat) assuming the medium is homogeneous.</p>
 <ul>
 <li>$s(t)$ is the substrate concentration ($\gL$) at time $t$</li>
 <li>$x(t)$ is the biomass concentration ($\gL$) at time $t$</li>
-<li>$v(t)$ is the volume of the culture medium ($\L$) at time $t$</li>
+<li>$v(t)$ is the volume of the culture medium ($L$) at time $t$</li>
 <li>$\Sin$ is the substrate intake concentration ($\gL$)</li>
-<li>$\Fin$ is the influent flow rate ($\L h^{-1}$)</li>
-<li>$\Fout$ is the effluent flow rate ($\L h^{-1}$)</li>
+<li>$\Fin$ is the influent flow rate ($L h^{-1}$)</li>
+<li>$\Fout$ is the effluent flow rate ($L h^{-1}$)</li>
 <li>$\mu(\cdot)$ is a the specific growth velocity function, assumed to be positive and of class $\CC^1$,
 its values are measured in $h^{-1}$.</li>
 <li>$Y$ is the yield of substrate consumption</li>
@@ -14346,7 +14353,7 @@ $$\begin{cases}
 <ul>
 <li>$s(t)$ is the substrate concentration ($\gL$) at time $t$</li>
 <li>$x(t)$ is the biomass concentration ($\gL$) at time $t$</li>
-<li>$v(t)$ is the volume of the culture medium ($\L$) at time $t$</li>
+<li>$v(t)$ is the volume of the culture medium ($L$) at time $t$</li>
 <li>$\Sin$ is the substrate intake concentration ($\gL$)</li>
 <li>$D$ is the dilution rate ($h^{-1}$)</li>
 <li>$\mu(\cdot)$ is a the specific growth velocity function, assumed to be positive and of class $\CC^1$,
@@ -14362,11 +14369,11 @@ Moreover, we suppose that $\mu$ is of the <em>Monod type</em>, such that</p>
 <ul>
 <li>$\mu(0)=0$</li>
 <li>$\mu'(s)&gt;0, \forall s\geq 0$</li>
-<li>$\mu([0,\infty[) = [0,\mu_\max[$</li>
+<li>$\mu([0,\infty[) = [0,\mumax[$</li>
 </ul>
 <p>The <strong>Monod function</strong>, verifying these conditions is defined as
 $$\mu(s) = \frac{\mu_{\max}s}{k_s + s}$$</p>
-<p>where $k_s$ is called the <em>semi-saturation</em> constant since $\mu(k_s)=\frac{\mu_\max}{2}$.</p>
+<p>where $k_s$ is called the <em>semi-saturation</em> constant since $\mu(k_s)=\frac{\mumax}{2}$.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14448,20 +14455,20 @@ $$ I_x = \sset{(s,x)\in\R^2_+}{\dxdt=0} $$
 Expanding the expression for $\dxdt$
 \begin{align}
 I_x &amp;= \sset{(s,x)\in\R^2_+}{(\mu(s) - D)x=0}\\
-&amp;= \sset{(s,x)\in\R^2_+}{x=0} \cup \sset{(s,x)\in\R^2_+}{\mu(s) - D=0,D\lt\mu_\max}\\
-&amp;= \cb{(s,0)\in\R^2_+} \cup \sset{(s,x)\in\R^2_+}{\mu(s)=D\lt\mu_\max}\\
-&amp;= \cb{(s,0)\in\R^2_+} \cup \sset{(s,x)\in\R^2_+}{s=\mu^{-1}(D),D\lt\mu_\max}\\
-&amp;= \cb{(s,0)\in\R^2_+} \cup \sset{(\mu^{-1}(D),x)\in\R^2}{D\lt\mu_\max}
+&amp;= \sset{(s,x)\in\R^2_+}{x=0} \cup \sset{(s,x)\in\R^2_+}{\mu(s) - D=0,D\lt\mumax}\\
+&amp;= \cb{(s,0)\in\R^2_+} \cup \sset{(s,x)\in\R^2_+}{\mu(s)=D\lt\mumax}\\
+&amp;= \cb{(s,0)\in\R^2_+} \cup \sset{(s,x)\in\R^2_+}{s=\mu^{-1}(D),D\lt\mumax}\\
+&amp;= \cb{(s,0)\in\R^2_+} \cup \sset{(\mu^{-1}(D),x)\in\R^2}{D\lt\mumax}
 \end{align}</p>
 <p>The set $\cb{(s,0)}$ is the horizontal axis, which corresponds to no biomass ($x=0$),
 this axis in logically invariant.</p>
 <p>The set $\cb{(\mu^{-1}(D),x)}$ corresponds to the vertical line that corresponds
 to the substrate concentration $s=\mu^{-1}(D)$ which is a well-defined value
-if $D\lt\mu_\max$ for any Monod-type function $\mu$ since a Monod-type function
+if $D\lt\mumax$ for any Monod-type function $\mu$ since a Monod-type function
 is monotonic (specifically: increasing) and positive $\forall s\geq 0$.</p>
-<p>For the Monod function $\mu(s)=\frac{\mu_\max s}{k_s + s}$,
-we can easily find the exression for $\mu^{-1}$ by setting $\mu(s)=r\in[0,\mu_\max[$.
-$$\mu(r) = \frac{r k_s}{\mu_\max - r}$$</p>
+<p>For the Monod function $\mu(s)=\frac{\mumax s}{k_s + s}$,
+we can easily find the exression for $\mu^{-1}$ by setting $\mu(s)=r\in[0,\mumax[$.
+$$\mu(r) = \frac{r k_s}{\mumax - r}$$</p>
 <p>The biomass nullcline is therefore the union of these two lines
 (if the vertical line is well-defined).</p>
 <h4 id="Substrate-nullcline-$\dsdt=0$">Substrate nullcline $\dsdt=0$<a class="anchor-link" href="#Substrate-nullcline-$\dsdt=0$">&#182;</a></h4><p>Similarly as for the biomass, we aim to find the states $(s,x)$
@@ -14477,7 +14484,7 @@ The set of equilibrium points can be defined as $E = I_s \cap I_x$.
 Which corresponds geometrically to the intersection of the $I_x$ nullclines with the $I_s$ nullcline.</p>
 \begin{align}
 E &amp;= I_s \cap I_x\\
-&amp;= \cb{\pp{s,\frac{D(\Sin - s)}{\mu(s)}}\in\R^2_+} \cap \pp{\cb{(s,0)\in\R^2_+} \cup \sset{(\mu^{-1}(D),x)\in\R^2_+}{D\lt\mu_\max}}\\
+&amp;= \cb{\pp{s,\frac{D(\Sin - s)}{\mu(s)}}\in\R^2_+} \cap \pp{\cb{(s,0)\in\R^2_+} \cup \sset{(\mu^{-1}(D),x)\in\R^2_+}{D\lt\mumax}}\\
 &amp;= \pp{\cb{\pp{s,\frac{D(\Sin - s)}{\mu(s)}}\in\R^2_+} \cap \cb{(s,0)\in\R^2_+}} \cup
    \pp{\cb{\pp{s,\frac{D(\Sin - s)}{\mu(s)}}\in\R^2_+} \cap \cb{(\mu^{-1}(D),x)\in\R^2_+}}\\
 &amp;= \sset{\pp{s,0}\in\R^2_+}{\frac{D(\Sin - s)}{\mu(s)} = 0} \cup
@@ -14491,8 +14498,8 @@ E &amp;= I_s \cap I_x\\
 as the equilibrium falls in the fourth quadrant ($x&lt;0$), which does not make
 sense as we only deal with positive values of biomass.
 In the case $\mu(\Sin)=D$ we have $E_0 = E_1$.</p>
-<p>Moreover, $\mu^{-1}(D)$ is only defined for $D\lt\mu_\max$.
-Hence, $E_1$ is non-empty for $D\in]\mu(\Sin),\mu_\max[$.</p>
+<p>Moreover, $\mu^{-1}(D)$ is only defined for $D\lt\mumax$.
+Hence, $E_1$ is non-empty for $D\in]\mu(\Sin),\mumax[$.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14613,7 +14620,7 @@ $$ \pmat{\tilde s(t)\\\tilde x(t)} = \exp(At) \pmat{\tilde s(0)\\\tilde x(0)} $$
 and the exponential of a square matrix is easily obtained from the diagonalized
 matrix which has the eigenvalues on its diagonal.</p>
 <p>For now, we will only study the eigenvalues, eigenvectors, and eigenspaces.</p>
-<h5 id="Eigenvalues-and-Eigenvectors">Eigenvalues and Eigenvectors<a class="anchor-link" href="#Eigenvalues-and-Eigenvectors">&#182;</a></h5><p>Let $\lambda\in\C,v\in\R^n$, we say that $\lambda$ is an eigenvalue of $A$
+<h5 id="Eigenvalues-and-Eigenvectors">Eigenvalues and Eigenvectors<a class="anchor-link" href="#Eigenvalues-and-Eigenvectors">&#182;</a></h5><p>Let $\lambda\in\Cx,v\in\R^n$, we say that $\lambda$ is an eigenvalue of $A$
 and $v\in\R^n$ is an eigenvector of $A$ associated to $\lambda$ if and only if
 $$ A v = \lambda v$$
 Or equivalently, $(A-\lambda Id)v = 0_{\R^n}$.</p>
@@ -14628,8 +14635,8 @@ $$\chi_\lambda=\det(A-\lambda Id)
 \lambda_2 = \mu(\Sin)-D
 \end{cases}$$</p>
 <ul>
-<li>$S_{A,1} = \ker(A-\lambda_1 Id) = \ker(A+D Id) = \ker\pmat{0 &amp; -\mu(\Sin)\\0 &amp; \mu(\Sin)} = \ker\pmat{0 &amp; -1\\0 &amp; 1} = \span\cb{\pmat{1\\0}}$</li>
-<li>$S_{A,2} = \ker(A-\lambda_2 Id) = \ker(A-(\mu(\Sin)-D) Id) = \ker\pmat{-\mu(\Sin)&amp;-\mu(\Sin)\\0&amp;0} = \ker\pmat{1&amp;1\\0&amp;0} = \span\cb{\pmat{1\\-1}}$</li>
+<li>$S_{A,1} = \ker(A-\lambda_1 Id) = \ker(A+D Id) = \ker\pmat{0 &amp; -\mu(\Sin)\\0 &amp; \mu(\Sin)} = \ker\pmat{0 &amp; -1\\0 &amp; 1} = \vect\cb{\pmat{1\\0}}$</li>
+<li>$S_{A,2} = \ker(A-\lambda_2 Id) = \ker(A-(\mu(\Sin)-D) Id) = \ker\pmat{-\mu(\Sin)&amp;-\mu(\Sin)\\0&amp;0} = \ker\pmat{1&amp;1\\0&amp;0} = \vect\cb{\pmat{1\\-1}}$</li>
 </ul>
 
 </div>
@@ -14762,7 +14769,7 @@ Since $\lambda_1=-D\lt 0$, the stability is solely determined by $\lambda_2=\mu(
 <p>We observe around $E_0$ two cases:</p>
 <ul>
 <li>Case $D\lt \mu(\Sin)$: the linearized system is unstable, as solutions have hyperbolic trajectories
-with $S_{A,1}=\span\cb{(1,0)}$ and $S_{A,2}=\span\cb{(1,-1)}$ as asymptotes for the hyperbolas,
+with $S_{A,1}=\vect\cb{(1,0)}$ and $S_{A,2}=\vect\cb{(1,-1)}$ as asymptotes for the hyperbolas,
 diverging along the $S_{A,2}$ axis, the eigenspace associated to the positive eigenvalue
 $\lambda_2 = \mu(\Sin)-D \gt 0$.</li>
 <li>Case $D\gt \mu(\Sin)$: the linearized system is asymptotically stable ($E_0$ is an attractor),
@@ -14788,10 +14795,10 @@ $$B=J(s_1,x_1)=\pmat{-\mu'(s_1)x_1-D &amp; -D\\\mu'(s_1)x_1 &amp; 0}$$</p>
 \end{cases}$$<ul>
 <li>$S_{B,1} = \ker(B-\lambda_1 Id) = \ker(B+D Id)
 = \ker\pmat{-\mu'(s_1)x_1 &amp; -D\\\mu'(s_1)x_1 &amp; D}
-= \span\cb{\pmat{D\\-\mu'(s_1)x_1}}$</li>
+= \vect\cb{\pmat{D\\-\mu'(s_1)x_1}}$</li>
 <li>$S_{B,2} = \ker(B-\lambda_2 Id) = \ker(B+(\mu'(s_1)x_1) Id)
 = \ker\pmat{-D &amp; -D\\\mu'(s_1)x_1 &amp; \mu'(s_1)x_1}
-= \span\cb{\pmat{1\\-1}}$</li>
+= \vect\cb{\pmat{1\\-1}}$</li>
 </ul>
 <h5 id="Stability-around-$E_1$">Stability around $E_1$<a class="anchor-link" href="#Stability-around-$E_1$">&#182;</a></h5><p>Since $\forall \lambda\in\rho(B), \lambda\lt 0$, $E_1$ is a local attractor.</p>
 
@@ -14869,7 +14876,7 @@ $$B=J(s_1,x_1)=\pmat{-\mu'(s_1)x_1-D &amp; -D\\\mu'(s_1)x_1 &amp; 0}$$</p>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$E_1$ is a singleton for $D\lt\mu(\Sin)$ if $D\lt\mu_\max$, in such case,
+<p>$E_1$ is a singleton for $D\lt\mu(\Sin)$ if $D\lt\mumax$, in such case,
 the linearized system is asymptotically stable ($E_1$ is an attractor),
 same as before, having disctinct negative eigenvalues, the solutions
 have parabolic trajectories with the eigenspace associated to the
@@ -15072,8 +15079,8 @@ $$\begin{cases}
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Nullclines">Nullclines<a class="anchor-link" href="#Nullclines">&#182;</a></h3><h4 id="Biomass-nullcline-$\dxdt=0$">Biomass nullcline $\dxdt=0$<a class="anchor-link" href="#Biomass-nullcline-$\dxdt=0$">&#182;</a></h4>$$ I_x = \sset{(s,x)\in\R^2_+}{\dxdt=0}
 = \sset{(s,x)\in\R^2_+}{(\mu(s) - D - k_d)x=0}
-= \cb{(s,0)\in\R^2_+} \cup \sset{(\mu^{-1}(D + k_d),x)\in\R^2}{D + k_d\lt\mu_\max}$$<p>We have as in the minimal model $\cb{(s,0)}$ the horizontal axis, which corresponds to no biomass ($x=0$).</p>
-<p>The set $\cb{(\mu^{-1}(D+k_d),x)}$ corresponds to a vertical line defined if $D+k_d\lt\mu_\max$ for any Monod-type function.</p>
+= \cb{(s,0)\in\R^2_+} \cup \sset{(\mu^{-1}(D + k_d),x)\in\R^2}{D + k_d\lt\mumax}$$<p>We have as in the minimal model $\cb{(s,0)}$ the horizontal axis, which corresponds to no biomass ($x=0$).</p>
+<p>The set $\cb{(\mu^{-1}(D+k_d),x)}$ corresponds to a vertical line defined if $D+k_d\lt\mumax$ for any Monod-type function.</p>
 <p>The biomass nullcline is therefore the union of these two lines
 (if the vertical line is well-defined).
 The vertical line here, if it exists, is simply the translation of the vertical isocline from the minimal
@@ -15091,8 +15098,8 @@ $$I_s = \sset{(s,x)\in\R^2_+}{\dsdt=0}
 However, similarly to the minimal model equilibrium point, $E_1$ is empty if $\mu(\Sin)&lt;D+k_d$
 as the equilibrium falls in the fourth quadrant ($x&lt;0$).
 In the case $\mu(\Sin)=D+kd$ we have $E_0 = E_1$.</p>
-<p>Moreover, $\mu^{-1}(D+k_d)$ is only defined for $D+k_d\lt\mu_\max$.
-Hence, $E_1$ is non-empty for $D+k_d\in]\mu(\Sin),\mu_\max[$.</p>
+<p>Moreover, $\mu^{-1}(D+k_d)$ is only defined for $D+k_d\lt\mumax$.
+Hence, $E_1$ is non-empty for $D+k_d\in]\mu(\Sin),\mumax[$.</p>
 
 </div>
 </div>
@@ -15108,8 +15115,8 @@ $$J(s,x) = \pmat{-\frac{\mu'(s)}{Y}x - D &amp; -\frac{\mu(s)}{Y} - k_m \\\mu'(s)
 \lambda_1 = -D\\
 \lambda_2 = \mu(\Sin)-D-k_d
 \end{cases}$$<ul>
-<li>$S_{A,1} = \ker(A-\lambda_1 Id) = \ker\pmat{0 &amp; -\frac{\mu(\Sin)}{Y} - k_m\\0 &amp; \mu(\Sin)-k_d} = \span\cb{\pmat{1\\0}}$</li>
-<li>$S_{A,2} = \ker(A-\lambda_2 Id) = \ker\pmat{-\mu(\Sin)+k_d &amp; -\frac{\mu(\Sin)}{Y} - k_m\\0 &amp; 0} = \span\cb{\pmat{\frac{\mu(\Sin)}{Y} + k_m\\-\mu(\Sin)+k_d}}$</li>
+<li>$S_{A,1} = \ker(A-\lambda_1 Id) = \ker\pmat{0 &amp; -\frac{\mu(\Sin)}{Y} - k_m\\0 &amp; \mu(\Sin)-k_d} = \vect\cb{\pmat{1\\0}}$</li>
+<li>$S_{A,2} = \ker(A-\lambda_2 Id) = \ker\pmat{-\mu(\Sin)+k_d &amp; -\frac{\mu(\Sin)}{Y} - k_m\\0 &amp; 0} = \vect\cb{\pmat{\frac{\mu(\Sin)}{Y} + k_m\\-\mu(\Sin)+k_d}}$</li>
 </ul>
 
 </div>

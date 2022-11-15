@@ -8,3 +8,6 @@ Binder Jupyter notebooks:
 
 Static HTML Jupyter notebooks:
 - [Growth of a single species](https://rand-asswad.github.io/chemostat-models/growth_single.html)
+
+PDF Jupyter notebooks:
+- [Growth of a single species](https://rand-asswad.github.io/chemostat-models/growth_single.pdf)

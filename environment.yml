@@ -6,6 +6,7 @@ dependencies:
 - python=3.8
 - numpy
 - matplotlib
+- matplotlib-label-lines
 - ipywidgets
 - jupyterlab>=3.1
 - voila>=0.2.11
