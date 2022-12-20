@@ -14474,31 +14474,7 @@ q_1 = \mu^{-1}(D)
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Local-stability-around-equilibria">Local stability around equilibria<a class="anchor-link" href="#Local-stability-around-equilibria">&#182;</a></h2><p>Identifying equilibria is the first step in studying a non-linear system,
-as the study of the system around its equilibria allows a better understanding
-of its global behaviour.</p>
-<p>In order to study its local behaviour around equilibria, we linearize the system
-with the help of its first order Taylor expansion.</p>
-<p>Considering a system, defined by it's state equation $\dqdt = f(q,t)$ where $q(t)$
-is the system's state vector at time $t$.
-Formally, let $U\subset\R^n$, we have</p>
-$$\mat{
-f: &amp; U\times\R &amp; \rightarrow &amp; \R^n\\
-   &amp; (q,t)     &amp; \mapsto     &amp; \pmat{f_1(q,t)\\\vdots\\ f_n(q,t)}
-}$$<p>The linearized system around an equilibrium $q_0$ is given by the Taylor formula of $f$
-$$ f(q,t) = f(q_0,t) + \nabla_q f(q_0,t)(q - q_0) + o(\norm{q-q_0}) $$
-where $\nabla_q f$ is the Jacobian of $f$ with respect to $q$, that is</p>
-$$\nabla_q f = \pmat{
-    \partials{f_1}{q_1} &amp; \cdots &amp; \partials{f_1}{q_n}\\
-    \vdots              &amp; \ddots &amp; \vdots\\
-    \partials{f_n}{q_1} &amp; \cdots &amp; \partials{f_n}{q_n}
-}$$<p>We can therefore describe the system $\forall q\in B_r(q_0)$ for a sufficiently small $r&gt;0$
-where $B_r(q_0) = \sset{q\in\R^n}{\norm{q-q_0}&lt;r}$ is an open ball.
-$$\dqdt\approx f(q_0,t) + J_f(q_0)(q(t)-q_0)$$</p>
-<p>Since $q_0$ is an equilibrium, by definition $f(q_0,t)=0,\forall t$, we can translate the system
-in order to take $q_0$ to the origin, let $\tilde{q}(t)=q(t)-q_0$, we have a linear system
-$$\frac{\dd\tilde{q}}{\dt}\approx J_f(q_0) \tilde{q}(t)$$</p>
-<h3 id="System-Jacobian">System Jacobian<a class="anchor-link" href="#System-Jacobian">&#182;</a></h3><p>In the case of the chemostat model</p>
+<h2 id="Local-stability-around-equilibria">Local stability around equilibria<a class="anchor-link" href="#Local-stability-around-equilibria">&#182;</a></h2><h3 id="System-Jacobian">System Jacobian<a class="anchor-link" href="#System-Jacobian">&#182;</a></h3><p>In the case of the chemostat model</p>
 $$\begin{cases}
 \dsdt = f_1(s,x,q) = -\rho(s)x + D(\Sin - s)\\
 \dxdt = f_2(s,x,q) = (\mu(q) - D)x\\
