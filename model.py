@@ -64,3 +64,16 @@ def plot_isocline_ds(ax, s=None, step=0.01, **kwargs):
     ax.plot(s, xs, color=color, label=label)
     ax.axis([xmin, xmax, ymin, ymax])
     return ax
+
+def plot_sigma(ax, s=None, step=0.01, **kwargs):
+    xmin, xmax, ymin, ymax = ax.axis()
+    color = kwargs.pop('color', 'orange')
+    label = kwargs.pop('label', '$\\dot{\\sigma}(t)=0$')
+
+    if not s:
+        smin = xmin if xmin > 0 else step
+        s = np.arange(smin, xmax, step)
+    x = kwargs['Y'] * (kwargs['Sin'] - s)
+    ax.plot(s, x, color=color, label=label)
+    ax.axis([xmin, xmax, ymin, ymax])
+    return ax
