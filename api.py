@@ -46,6 +46,19 @@ def phase_portrait(xlim, ylim, dF, mesh=1.0, step=0.1,
         ax.set_ylabel(ylabel)
     return ax
 
+def phase_portrait_3D(xlim, ylim, dF, z_func, z_axis=2, **kwargs):
+    def f_2D(x, y, **dF_params):
+        if z_axis == 0:
+            _, dx, dy = dF(z_func(x, y, **dF_params), x, y, **dF_params)
+        elif z_axis == 1:
+            dx, _, dy = dF(x, z_func(x, y, **dF_params), y, **dF_params)
+        elif z_axis == 2:
+            dx, dy, _ = dF(x, y, z_func(x, y, **dF_params), **dF_params)
+        else:
+            raise ValueError('fixed_axis should be in [0, 1, 2]')
+        return dx, dy
+    return phase_portrait(xlim, ylim, f_2D, **kwargs)
+
 def plot_eigenspaces(u, v, pt=[0,0], t=[-1,1], ax=None, **kwargs):
     if ax:
         xmin, xmax, ymin, ymax = ax.axis()
@@ -78,3 +91,11 @@ def plot_equilibria(eq, name=None, ax=None, **kwargs):
         for i in range(len(eq)):
             ax.text(E[i,0] + 0.02, E[i,1] + 0.02, name[i], fontsize=fontsize)
     return ax
+
+def plot_equilibria_from_3D(eq, z_axis=2, **kwargs):
+    eq2 = []
+    indices = [[1, 2], [0, 2], [0, 1]]
+    ind = indices[z_axis]
+    for pt in eq:
+        eq2.append([pt[ind[0]], pt[ind[1]]])
+    return plot_equilibria(eq2, **kwargs)
