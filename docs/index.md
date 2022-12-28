@@ -1,2 +1,2 @@
-- [Growth of a single species](growth_single.html)
-
+- [Growth of a single species (constant yield)](growth_single.html)
+- [Growth of a single species (variable yield)](droop.html)
