@@ -13,9 +13,9 @@ def phase_portrait(xlim, ylim, dF, mesh=1.0, step=0.1,
         fig, ax = plt.subplots()
     else:
         fig = ax.get_figure()
-    ax.axes.set_aspect('equal')
-    xmesh, ymesh = mesh if type(mesh) is tuple else mesh, mesh
-    xstep, ystep = step if type(step) is tuple else step, step
+    kwargs.pop('equal_axes', True) and ax.axes.set_aspect('equal')
+    xmesh, ymesh = mesh if type(mesh) is tuple else (mesh, mesh)
+    xstep, ystep = step if type(step) is tuple else (step, step)
     title = kwargs.pop("title", None)
     xlabel = kwargs.pop("xlabel", None)
     ylabel = kwargs.pop("ylabel", None)

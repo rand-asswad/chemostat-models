@@ -38,17 +38,16 @@ def mu_deriv(q, μmax=1.0, qmin=0.5, kq=0.5, **kw):
         return 0
     return (μmax*kq) / (kq + max(q - qmin, 0))**2
 
-def f(s, x, q, D=1.0, Sin=2.0, μmax=1.0, ks=0.2,
-      ρmax=1.0, qmin=0.5, kq=0.5):
-    ρ = rho(s, ρmax=ρmax, ks=ks)
-    μ = mu(q, μmax=μmax, qmin=qmin, kq=kq)
+def f(s, x, q, D=1.0, Sin=2.0, **kw):
+    ρ = rho(s, **kw)
+    μ = mu(q, **kw)
     ds = -ρ*x + D*(Sin - s)
     dx = (μ - D)*x
     dq = ρ - q*μ
     return ds, dx, dq
 
-def isocline_ds_get_x(s, D=1.0, Sin=2.0, ρmax=1.0, ks=0.2, **kw):
-    return D*(Sin - s) / rho(s, ρmax=ρmax, ks=ks)
+def isocline_ds_get_x(s, D=1.0, Sin=2.0, **kw):
+    return D*(Sin - s) / rho(s, **kw)
 
 def isocline_dq_get_q(s, **kw):
     a = kw['qmin'] + rho(s, **kw)/kw['μmax']
@@ -75,7 +74,7 @@ def equilibria(**kw):
     D = kw['D']
     if D < kw['μmax']:
         q1 = mu_inv(D, **kw)
-        if q1 > 0 and q1 < kw['ρmax'] and q1 < q0:
+        if q1 > 0 and q1*D < kw['ρmax'] and q1 < q0:
             s1 = rho_inv(q1*D, **kw)
             x1 = isocline_ds_get_x(s1, **kw)
             if s1 > 0 and x1 > 0:
@@ -83,34 +82,59 @@ def equilibria(**kw):
     return E
 
 # plots
-def plot_isocline_dx(ax, s=None, step=0.01, **kwargs):
+def plot_isoclines_sx(ax, **params):
+    D = params['D']
+    Sin = params['Sin']
     xmin, xmax, ymin, ymax = ax.axis()
-    color = kwargs.pop('color', 'b')
-    label = kwargs.pop('label', '$\\dot{x}(t)=0$')
-    D = kwargs.get('D', None)
 
-    if not s:
-        smin = xmin if xmin > 0 else step
-        s = np.arange(smin, xmax, step)
-
-    ax.axhline(y=0, xmin=xmin, xmax=xmax, color=color, label=label)
-    if D and D < kwargs['μmax']:
-        #ax.axvline(x=mu_inv(D, **kwargs), ymin=ymin, ymax=ymax, color=color)
-        xs = isocline_dx(s, **kwargs)
-        ax.plot(s, xs, color=color)
+    # s-nullcline
+    s = np.arange(max(xmin,0.01), Sin, 0.01)
+    ax.plot(s, isocline_ds_get_x(s, **params), color='r', label='$\\dot{s}=0$')
+    # x-nullcline
+    ax.axhline(y=0, xmin=xmin, xmax=xmax, color='b', label='$\\dot{x}=0$')
+    x = (Sin - s) / mu_inv(D, **params)
+    ax.plot(s, x, color='b')
+    # q-nullcline
+    x = (Sin - s) / isocline_dq_get_q(s, **params)
+    ax.plot(s, x, color='orange', linestyle='dashed', label='$\\dot{q}=0$')
+    
     ax.axis([xmin, xmax, ymin, ymax])
     return ax
 
-
-def plot_isocline_ds(ax, s=None, step=0.01, **kwargs):
+def plot_isoclines_sq(ax, **params):
+    D = params['D']
+    Sin = params['Sin']
     xmin, xmax, ymin, ymax = ax.axis()
-    color = kwargs.pop('color', 'r')
-    label = kwargs.pop('label', '$\\dot{s}(t)=0$')
+    
+    # s-nullcline
+    s = np.arange(max(xmin,0.01), xmax, 0.1)
+    ax.plot(s, rho(s, **params) / D, color='r', label='$\\dot{s}=0$')
+    ax.axvline(x=Sin, ymin=ymin, ymax=ymax, color='r')
+    # x-nullcline
+    ax.axhline(y=mu_inv(D, **params), xmin=xmin, xmax=xmax, color='b', linestyle='dashed', label='$\\dot{x}=0$')
+    ax.axvline(x=Sin, ymin=ymin, ymax=ymax, color='b', linestyle=(0, (5, 10)))
+    # q-nullcline
+    ax.plot(s, isocline_dq_get_q(s, **params), color='orange', label='$\\dot{q}=0$')
 
-    if not s:
-        smin = xmin if xmin > 0 else step
-        s = np.arange(smin, xmax, step)
-    xs = isocline_ds_get_x(s, **kwargs)
-    ax.plot(s, xs, color=color, label=label)
+    ax.axis([xmin, xmax, ymin, ymax])
+    return ax
+
+def plot_isoclines_xq(ax, **params):
+    D = params['D']
+    Sin = params['Sin']
+    xmin, xmax, ymin, ymax = ax.axis()
+
+    # x-nullcline
+    ax.axhline(y=mu_inv(D, **params), xmin=xmin, xmax=xmax, color='b', label='$\\dot{x}=0$')
+    ax.axvline(x=0, ymin=ymin, ymax=ymax, color='b')
+    # q-nullcline
+    q = np.arange(max(ymin,0.01), ymax, 0.01)
+    x = (Sin - rho_inv(q * mu(q, **params), **params)) / q
+    ax.plot(x, q, color='orange', label='$\\dot{q}=0$')
+    # s-nullcline
+    x = (Sin - rho_inv(D*q, **params)) / q
+    ax.plot(x, q, color='r', linestyle='dashed', label='$\\dot{s}=0$')
+    ax.axvline(x=0, ymin=ymin, ymax=ymax, color='r', linestyle=(0, (5, 10)))
+
     ax.axis([xmin, xmax, ymin, ymax])
     return ax

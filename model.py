@@ -19,15 +19,14 @@ def mu_inv(r, μmax=1.0, ks=0.2, **kw):
 def mu_deriv(s, μmax=1.0, ks=0.2, **kw):
     return (μmax*ks) / (ks + s)**2
 
-def growth_rate(s, x, D=1.0, Sin=2.0, μmax=1.0, ks=0.2,
-                Y=1.0, km=0, kd=0):
-    μ = mu(s, μmax=μmax, ks=ks)
+def growth_rate(s, x, D=1.0, Sin=2.0, Y=1.0, km=0, kd=0, **kw):
+    μ = mu(s, **kw)
     ds = -(μ/Y + km)*x + D*(Sin - s)
     dx = (μ - D - kd)*x
     return ds, dx
 
-def isocline_ds(s, D=1.0, Sin=2.0, μmax=1.0, ks=0.2, Y=1.0, km=0, **kw):
-    return D*(Sin - s) / (mu(s, μmax=μmax, ks=ks)/Y + km)
+def isocline_ds(s, D=1.0, Sin=2.0, Y=1.0, km=0, **kw):
+    return D*(Sin - s) / (mu(s, **kw)/Y + km)
 
 def equilibria(D=1.0, Sin=2.0, kd=0, **kw):
     E = [[Sin, 0]]
